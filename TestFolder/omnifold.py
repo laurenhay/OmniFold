@@ -102,8 +102,8 @@ def omnifold(theta0,theta_unknown_S,iterations,model,verbose=0):
                       metrics=['accuracy'])
         model.fit(X_train_2,
                   Y_train_2,
-                  epochs=200,
-                  batch_size=2000,
+                  epochs=300,
+                  batch_size=10000,
                   validation_data=(X_test_2, Y_test_2),
                   verbose=verbose)
         
