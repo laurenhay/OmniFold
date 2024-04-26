@@ -19,8 +19,17 @@ from coffea.nanoevents import NanoEventsFactory, NanoAODSchema
 
 from tensorflow.python.client import device_lib
 
-root = tk.Tk()
-root.withdraw()
+# root = tk.Tk()
+# root.withdraw()
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-i', '--input', required=False, default = "../QCD_Pt-15to7000_TuneCP5_Flat2018_13TeV_pythia8_NANOAODSIM_7F142AC6-39F2-2F4F-9F97-C425A1C99A35.root", help='MC input root file')
+parser.add_argument('-o', '--output', default="QCD_unfolded.txt",  help='Unfolding output filename')                    
+args = parser.parse_args("")
+
+
+
 
 def get_available_devices():
     local_device_protos = device_lib.list_local_devices()
@@ -39,8 +48,8 @@ def chooseroot():  #call stacker for this instead
 
 
 def stacker(): #calls chooseroot() internally 
-
-    rfile, ofile = chooseroot()
+    rfile = args.input
+    ofile = args.output
     events = uproot.open(rfile)
     events = events['Events']
     #events = uproot.open("QCD_pt.root:Events")
